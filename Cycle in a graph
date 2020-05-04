@@ -1,0 +1,71 @@
+//cycle in graph provided no parallel edges bw vertices
+//if there is a back edge then it is graph
+//if there are more thn 1 path bw any 2 vertices then it is a cycle
+
+#include <bits/stdc++.h>
+
+using namespace std;
+vector<int>ad[1000];
+int visit[1000];
+bool dfs(int node,int parent)
+{
+    
+    visit[node]=1;
+    
+    
+    for(int i=0;i<ad[node].size();i++){
+        
+        int child=ad[node].at(i);
+        
+        if(visit[child]==0)
+        {
+            
+            bool ans=dfs(child,node);
+           
+           if(ans==true)
+           return true;
+            
+        }
+        else
+        {
+            if(child!=parent)  //chek if the child is not equal to parent
+            return true;
+        }
+        
+        
+    }
+    
+    
+    return false;
+    
+    
+    
+    
+    
+    
+}
+int main()
+{
+  int n,m;
+  cin>>n>>m;
+  
+  while(m--)
+  {
+      int p,q;
+      cin>>p>>q;
+      ad[p].push_back(q);
+      ad[q].push_back(p);
+  }
+  
+  
+  bool ans=dfs(1,-1);
+  if(ans==true)
+  cout<<"CYCLE";
+  else
+  cout<<"NO CYCLE";
+  
+  
+  
+   
+  
+}
