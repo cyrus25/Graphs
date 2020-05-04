@@ -1,0 +1,86 @@
+
+
+#include <bits/stdc++.h>
+
+using namespace std;
+
+vector<int>ar[10000];
+int dist[10000];
+int visit[10000];
+void dfs(int node,int d)
+{
+
+       visit[node]=1;
+       
+     dist[node]=d;
+
+     for(int i=0;i<ar[node].size();i++)
+     {
+     
+	 int child=ar[node].at(i);
+
+	     if(visit[child]==0)
+	     dfs(child,d+1); 
+
+
+     }   
+
+
+
+
+
+
+}
+
+int main() {
+
+
+    int n;
+	cin>>n;
+
+	for(int i=1;i<n;i++)
+	{
+        int p,q;
+		cin>>p>>q;
+		ar[p].push_back(q);
+		ar[q].push_back(p);
+	}
+
+
+	dfs(1,0);
+
+	int mn=INT_MAX;
+     int ans=-1;
+
+ 
+ int q;
+ cin>>q;
+ while(q--)
+ {
+
+    int p;
+	cin>>p;
+
+	if(dist[p]<mn)
+	{
+		mn=dist[p];
+		ans=p;
+	}
+
+
+
+ }
+
+
+ cout<<ans;
+
+             
+
+
+
+
+
+}
+	
+
+
